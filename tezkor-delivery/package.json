@@ -1,0 +1,9 @@
+{
+  "name": "tezkor-delivery",
+  "version": "3.0.0",
+  "description": "TEZKOR DELIVERY: sayt + admin panel + API (tashqi paketlarsiz)",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" },
+  "license": "UNLICENSED"
+}

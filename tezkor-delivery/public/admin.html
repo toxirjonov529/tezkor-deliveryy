@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Admin panel — TEZKOR DELIVERY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Unbounded:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--y:#FFC700;--bg:#F6F3E8;--card:#fff;--ink:#000;--mut:#5c5a52;--line:#E8E3D0;--side:#000;--ok:#1c9a4d;--bad:#d12c2c;--f-d:'Unbounded','Arial Black',sans-serif;--f-b:'Manrope',system-ui,sans-serif}
+[data-theme=dark]{--bg:#0a0a0a;--card:#161616;--ink:#fff;--mut:#a3a095;--line:#2a2a26;--side:#111}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{font-family:var(--f-b);background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer;border:0;background:none}
+:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:99px;font-weight:700;background:#000;color:var(--y);transition:transform .2s}
+[data-theme=dark] .btn{background:var(--y);color:#000}.btn:hover{transform:translateY(-2px)}
+.btn--y{background:var(--y)!important;color:#000!important}.btn--g{background:transparent!important;color:var(--ink)!important;border:1.5px solid var(--line)}
+.btn--s{padding:7px 14px;font-size:.85rem}.btn--r{background:transparent!important;color:var(--bad)!important;border:1.5px solid var(--bad)}
+/* Kirish */
+.login{min-height:100vh;display:grid;place-items:center;padding:20px;background:var(--y)}
+[data-theme=dark] .login{background:#000}
+.login__c{width:min(400px,100%);background:var(--card);border-radius:30px;padding:36px;box-shadow:0 40px 80px -30px rgba(0,0,0,.6);display:grid;gap:12px}
+.login__c h1{font-family:var(--f-d);font-size:1.5rem}.login__c p{color:var(--mut)}
+.in{width:100%;padding:13px 15px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg)}
+.in:focus{outline:0;border-color:var(--y);box-shadow:0 0 0 4px rgba(255,199,0,.3)}
+.err{color:var(--bad);font-weight:600;min-height:1.3em;font-size:.9rem}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--f-d);font-weight:800}
+.logo i{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:#000;color:var(--y);font-style:normal}
+/* Maket */
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.side{background:var(--side);color:#fff;padding:22px 16px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:6px}
+.side .logo{color:#fff;margin:0 8px 22px}.side .logo i{background:var(--y);color:#000}
+.tab{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;color:#c9c6b9;font-weight:700;text-align:left;width:100%;transition:background .2s,color .2s}
+.tab:hover{background:#1d1d1d;color:#fff}.tab.on{background:var(--y);color:#000}
+.tab b{margin-left:auto;background:var(--bad);color:#fff;border-radius:99px;font-size:.72rem;padding:1px 8px}
+.side__f{margin-top:auto;display:grid;gap:6px}
+.main{padding:28px clamp(16px,3vw,40px) 60px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.top h1{font-family:var(--f-d);font-size:clamp(1.3rem,2.4vw,1.8rem);letter-spacing:-.02em}
+.top__a{display:flex;gap:8px;flex-wrap:wrap}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:18px}
+.st{background:var(--card);border:1.5px solid var(--line);border-radius:24px;padding:20px}
+.st small{color:var(--mut);font-weight:700}.st strong{display:block;font-family:var(--f-d);font-size:1.5rem;margin-top:4px;letter-spacing:-.03em}
+.st:first-child{background:var(--y);color:#000;border-color:var(--y)}.st:first-child small{color:#000;opacity:.7}
+.row2{display:grid;grid-template-columns:1.6fr 1fr;gap:14px}
+.box{background:var(--card);border:1.5px solid var(--line);border-radius:24px;padding:22px;min-width:0}
+.box h2{font-family:var(--f-d);font-size:1rem;margin-bottom:14px}
+.chart{display:flex;align-items:flex-end;gap:10px;height:200px;padding-top:10px}
+.chart div{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end;font-size:.72rem;color:var(--mut);font-weight:700}
+.chart i{display:block;width:100%;max-width:46px;background:var(--y);border-radius:10px 10px 4px 4px;min-height:4px;transition:height .6s cubic-bezier(.22,.8,.3,1)}
+.chart em{font-style:normal;color:var(--ink)}
+.top5 li{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);list-style:none}.top5 li:last-child{border:0}
+.tw{overflow-x:auto;border:1.5px solid var(--line);border-radius:24px;background:var(--card)}
+table{width:100%;border-collapse:collapse;min-width:680px}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:.8rem;color:var(--mut);font-weight:800}tr:last-child td{border:0}
+td small{display:block;color:var(--mut)}
+.pill{display:inline-block;padding:4px 12px;border-radius:99px;font-weight:700;font-size:.8rem;background:var(--bg)}
+.pill--new{background:var(--y);color:#000}.pill--ok{background:#d6f5e1;color:#14693a}.pill--x{background:#fadada;color:#9c1f1f}
+select.in{padding:8px 10px;width:auto;border-radius:12px}
+.thumb{width:48px;height:48px;border-radius:12px;object-fit:cover;background:var(--y);display:grid;place-items:center;font-size:1.4rem}
+.empty{padding:50px 20px;text-align:center;color:var(--mut)}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.bar .in{max-width:280px}
+.msg{padding:18px 0;border-bottom:1px solid var(--line);display:grid;gap:6px}.msg:last-child{border:0}
+.msg.unread{border-left:4px solid var(--y);padding-left:14px}
+.msg__h{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700}.msg__h small{color:var(--mut);font-weight:600}
+/* Oyna */
+.dlg{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;place-items:center;padding:16px;z-index:50}.dlg.open{display:grid}
+.dlg form{background:var(--card);border-radius:28px;padding:28px;width:min(520px,100%);max-height:92vh;overflow:auto;display:grid;gap:8px}
+.dlg h2{font-family:var(--f-d);font-size:1.2rem;margin-bottom:6px}.dlg label{font-weight:700;font-size:.88rem}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chk{display:flex;gap:8px;align-items:center;font-weight:700}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);background:#000;color:var(--y);padding:12px 22px;border-radius:99px;font-weight:700;opacity:0;pointer-events:none;transition:.3s;z-index:60}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.note{background:color-mix(in srgb,var(--y) 22%,transparent);border-radius:16px;padding:12px 16px;font-size:.88rem;margin-bottom:16px}
+@media(max-width:860px){.app{grid-template-columns:1fr}.side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;padding:12px}.side .logo{display:none}.tab{width:auto;padding:9px 12px}.side__f{margin:0;flex-direction:row}.row2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- KIRISH -->
+<div class="login" id="login">
+  <form class="login__c" id="loginForm" novalidate>
+    <div class="logo"><i>⚡</i>TEZKOR</div>
+    <h1>Admin panelga kirish</h1>
+    <p id="loginHint">Parolni kiriting.</p>
+    <label for="pw" style="font-weight:700">Parol</label>
+    <input class="in" id="pw" type="password" autocomplete="current-password" autofocus>
+    <p class="err" id="pwErr" role="alert"></p>
+    <button class="btn btn--y" type="submit" style="justify-content:center">Kirish</button>
+    <a href="index.html" style="text-align:center;color:var(--mut);font-weight:600">Saytga qaytish</a>
+  </form>
+</div>
+
+<!-- PANEL -->
+<div class="app" id="app" hidden style="display:none">
+  <aside class="side">
+    <div class="logo"><i>⚡</i>TEZKOR admin</div>
+    <button class="tab on" data-t="dash"><svg viewBox="0 0 24 24"><path d="M4 13h6V4H4zM14 20h6V4h-6zM4 20h6v-3H4z"/></svg>Boshqaruv</button>
+    <button class="tab" data-t="orders"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg>Buyurtmalar<b id="nNew" hidden>0</b></button>
+    <button class="tab" data-t="prods"><svg viewBox="0 0 24 24"><path d="m12 3 9 5v8l-9 5-9-5V8zM3 8l9 5 9-5M12 13v8"/></svg>Mahsulotlar</button>
+    <button class="tab" data-t="msgs"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>Xabarlar<b id="nMsg" hidden>0</b></button>
+    <div class="side__f">
+      <a class="tab" href="index.html"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Saytga qaytish</a>
+      <button class="tab" id="themeBtn"><svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Tungi rejim</button>
+      <button class="tab" id="logout"><svg viewBox="0 0 24 24"><path d="M9 4H5v16h4M16 8l4 4-4 4M20 12H9"/></svg>Chiqish</button>
+    </div>
+  </aside>
+  <main class="main" id="view"></main>
+</div>
+
+<div class="dlg" id="dlg" role="dialog" aria-modal="true" aria-labelledby="dTitle">
+  <form id="pForm" novalidate>
+    <h2 id="dTitle">Mahsulot</h2>
+    <label for="pName">Nomi</label><input class="in" id="pName" maxlength="60">
+    <div class="g2"><div><label for="pCat">Kategoriya</label><select class="in" id="pCat" style="width:100%"></select></div>
+    <div><label for="pPrice">Narxi (so'm)</label><input class="in" id="pPrice" type="number" min="0" step="500"></div></div>
+    <label for="pDesc">Tavsif</label><textarea class="in" id="pDesc" rows="3" maxlength="200"></textarea>
+    <div class="g2"><div><label for="pImg">Rasm havolasi (ixtiyoriy)</label><input class="in" id="pImg" placeholder="https://..."></div>
+    <div><label for="pEmo">Emoji</label><input class="in" id="pEmo" maxlength="4" placeholder="🍔"></div></div>
+    <label class="chk"><input type="checkbox" id="pPop"> Mashhur mahsulotlarda ko'rsatish</label>
+    <p class="err" id="pErr" role="alert"></p>
+    <div style="display:flex;gap:10px;justify-content:flex-end"><button type="button" class="btn btn--g" id="pCancel">Bekor qilish</button><button class="btn btn--y" type="submit">Saqlash</button></div>
+  </form>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="data.js"></script>
+<script>
+'use strict';
+/* Demo admin panel: ma'lumot shu brauzerning LocalStorage'ida turadi.
+   Parol tekshiruvi faqat demo. Haqiqiy himoya 3-bosqichda (server, JWT) ulanadi. */
+const PASSWORD = 'weryurak2214';
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const money = (n) => new Intl.NumberFormat('uz-UZ').format(n).replace(/,/g, ' ');
+const ld = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } };
+const sv = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { toast('Saqlab bo\'lmadi: xotira to\'lgan'); } };
+let tmr; const toast = (m) => { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(tmr); tmr = setTimeout(() => t.classList.remove('on'), 2200); };
+
+const STATUS = { new: ['Yangi', 'pill--new'], cook: ['Tayyorlanmoqda', ''], way: ['Yo\'lda', ''], done: ['Yetkazildi', 'pill--ok'], cancel: ['Bekor qilingan', 'pill--x'] };
+const CATS = ['Fast Food', 'Pizza', 'Sushi', 'Ichimliklar', 'Market', 'Shirinliklar'];
+const st = { tab: 'dash', filter: 'all', q: '', edit: null };
+const S = { on: false, token: '', orders: [], prods: null, msgs: [] };
+async function api(method, url, body) {
+  const r = await fetch(url, { method, headers: { ...(body ? { 'Content-Type': 'application/json' } : {}), Authorization: 'Bearer ' + S.token }, body: body ? JSON.stringify(body) : undefined });
+  let d = {}; try { d = await r.json(); } catch (e) {}
+  if (r.status === 401 && url !== '/api/admin/login') { sessionStorage.removeItem('tz-admin'); S.token = ''; gate(); throw new Error('Seans tugadi. Qayta kiring.'); }
+  if (!r.ok) throw new Error(d.error || 'Server xatosi');
+  return d;
+}
+async function load() { [S.orders, S.prods, S.msgs] = await Promise.all([api('GET', '/api/admin/orders'), api('GET', '/api/admin/products'), api('GET', '/api/admin/messages')]); }
+const orders = () => (S.on ? S.orders : ld('tz-admin-orders', []));
+const prods = () => { const a = S.on ? S.prods : ld('tz-admin-products', null); return Array.isArray(a) && a.length ? a : DATA.products.map((p) => ({ ...p })); };
+const msgs = () => (S.on ? S.msgs : ld('tz-admin-msgs', []));
+const when = (t) => new Date(t).toLocaleString('uz-UZ', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+
+/* ---- Kirish ---- */
+const authed = () => sessionStorage.getItem('tz-admin') === '1';
+async function gate() {
+  const ok = authed(); $('#login').hidden = ok; $('#app').hidden = !ok; $('#login').style.display = ok ? 'none' : ''; $('#app').style.display = ok ? '' : 'none'; if (ok) window.scrollTo(0, 0);
+  if (!authed()) return;
+  if (S.on) { try { await load(); } catch (e) { toast(e.message); return; } }
+  render();
+}
+$('#loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault(); const pw = $('#pw').value;
+  if (S.on) {
+    try { const r = await api('POST', '/api/admin/login', { password: pw }); S.token = r.token; sessionStorage.setItem('tz-admin', '1'); sessionStorage.setItem('tz-token', r.token); $('#pwErr').textContent = ''; gate(); }
+    catch (er) { $('#pwErr').textContent = er.message; $('#pw').select(); }
+    return;
+  }
+  if (pw === PASSWORD) { sessionStorage.setItem('tz-admin', '1'); $('#pwErr').textContent = ''; gate(); }
+  else { $('#pwErr').textContent = 'Parol noto\'g\'ri. Qayta urinib ko\'ring.'; $('#pw').select(); }
+});
+$('#logout').onclick = () => { sessionStorage.removeItem('tz-admin'); sessionStorage.removeItem('tz-token'); S.token = ''; $('#pw').value = ''; gate(); };
+$('#themeBtn').onclick = () => { const d = document.documentElement; d.dataset.theme = d.dataset.theme === 'dark' ? 'light' : 'dark'; try { localStorage.setItem('tz-theme', d.dataset.theme); } catch (e) {} };
+try { const t = localStorage.getItem('tz-theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+document.querySelectorAll('.tab[data-t]').forEach((b) => b.onclick = () => { st.tab = b.dataset.t; render(); });
+
+/* ---- Ko'rinishlar ---- */
+function render() {
+  document.querySelectorAll('.tab[data-t]').forEach((b) => b.classList.toggle('on', b.dataset.t === st.tab));
+  const nNew = orders().filter((o) => o.status === 'new').length, nMsg = msgs().filter((m) => !m.read).length;
+  $('#nNew').textContent = nNew; $('#nNew').hidden = !nNew; $('#nMsg').textContent = nMsg; $('#nMsg').hidden = !nMsg;
+  $('#view').innerHTML = { dash, orders: ordersView, prods: prodsView, msgs: msgsView }[st.tab]();
+}
+
+function dash() {
+  const O = orders(), live = O.filter((o) => o.status !== 'cancel'), rev = live.reduce((s, o) => s + o.total, 0);
+  const days = [...Array(7)].map((_, i) => { const d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - (6 - i)); return d; });
+  const sums = days.map((d) => live.filter((o) => { const t = new Date(o.ts); t.setHours(0, 0, 0, 0); return +t === +d; }).reduce((s, o) => s + o.total, 0));
+  const max = Math.max(...sums, 1), P = prods(), cnt = {};
+  live.forEach((o) => (o.items || []).forEach(([id, q]) => { cnt[id] = (cnt[id] || 0) + q; }));
+  const top = Object.entries(cnt).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([id, q]) => [(P.find((p) => p.id === id) || { name: id }).name, q]);
+  return `<div class="top"><h1>Boshqaruv</h1><div class="top__a">${S.on ? '' : '<button class="btn btn--g btn--s" data-do="seed">Demo buyurtmalar qo\'shish</button>'}</div></div>
+  <div class="cards">
+    <div class="st"><small>Umumiy tushum</small><strong>${money(rev)} so'm</strong></div>
+    <div class="st"><small>Buyurtmalar</small><strong>${live.length}</strong></div>
+    <div class="st"><small>O'rtacha chek</small><strong>${money(live.length ? Math.round(rev / live.length) : 0)}</strong></div>
+    <div class="st"><small>Yangi (kutilmoqda)</small><strong>${O.filter((o) => o.status === 'new').length}</strong></div>
+    <div class="st"><small>Mahsulotlar</small><strong>${P.length}</strong></div>
+  </div>
+  <div class="row2">
+    <div class="box"><h2>So'nggi 7 kun tushumi</h2><div class="chart">${sums.map((v, i) => `<div><em>${v ? Math.round(v / 1000) + 'k' : ''}</em><i style="height:${Math.round(v / max * 150)}px"></i>${days[i].toLocaleDateString('uz-UZ', { weekday: 'short' })}</div>`).join('')}</div></div>
+    <div class="box"><h2>Eng ko'p sotilgan</h2>${top.length ? `<ul class="top5">${top.map(([n, q]) => `<li><span>${esc(n)}</span><b>${q} ta</b></li>`).join('')}</ul>` : '<p class="empty">Hali ma\'lumot yo\'q</p>'}</div>
+  </div>`;
+}
+
+function ordersView() {
+  let O = orders();
+  const f = st.filter; if (f !== 'all') O = O.filter((o) => o.status === f);
+  const rows = O.map((o) => `<tr>
+    <td><b>${esc(o.no)}</b><small>${when(o.ts)}</small></td>
+    <td>${esc(o.name)}<small>${esc(o.phone)}</small></td>
+    <td>${esc(o.addr)}</td><td>${o.count} ta<small>${esc(o.pay)}</small></td>
+    <td><b>${money(o.total)}</b> so'm</td>
+    <td><select class="in" data-st="${esc(o.no)}" aria-label="Holat">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}"${o.status === k ? ' selected' : ''}>${v[0]}</option>`).join('')}</select></td>
+    <td><button class="btn btn--r btn--s" data-del-o="${esc(o.no)}">O'chirish</button></td></tr>`).join('');
+  return `<div class="top"><h1>Buyurtmalar</h1><div class="top__a"><button class="btn btn--g btn--s" data-do="csv">CSV yuklab olish</button></div></div>
+  <div class="bar"><select class="in" id="fSt"><option value="all">Hammasi</option>${Object.entries(STATUS).map(([k, v]) => `<option value="${k}"${f === k ? ' selected' : ''}>${v[0]}</option>`).join('')}</select></div>
+  <div class="tw">${rows ? `<table><thead><tr><th>Raqam</th><th>Mijoz</th><th>Manzil</th><th>Tarkib</th><th>Jami</th><th>Holat</th><th></th></tr></thead><tbody>${rows}</tbody></table>` : '<p class="empty">Buyurtmalar yo\'q. Saytdan buyurtma bering yoki «Boshqaruv» bo\'limida demo ma\'lumot qo\'shing.</p>'}</div>`;
+}
+
+function prodsView() {
+  const q = st.q.toLowerCase(), P = prods().filter((p) => !q || p.name.toLowerCase().includes(q));
+  const rows = P.map((p) => `<tr>
+    <td>${p.img ? `<img class="thumb" src="${esc(p.img)}" alt="" onerror="this.outerHTML='<span class=thumb>${esc(p.fb || '🍽️')}</span>'">` : `<span class="thumb">${esc(p.fb || '🍽️')}</span>`}</td>
+    <td><b>${esc(p.name)}</b><small>${esc(p.desc)}</small></td><td>${esc(p.cat)}</td><td><b>${money(p.price)}</b> so'm</td><td>${p.pop ? '<span class="pill pill--new">Mashhur</span>' : ''}</td>
+    <td style="white-space:nowrap"><button class="btn btn--g btn--s" data-edit="${esc(p.id)}">Tahrirlash</button> <button class="btn btn--r btn--s" data-del-p="${esc(p.id)}">O'chirish</button></td></tr>`).join('');
+  return `<div class="top"><h1>Mahsulotlar</h1><div class="top__a"><button class="btn btn--g btn--s" data-do="reset">Asl holatga qaytarish</button><button class="btn btn--y btn--s" data-do="add">+ Yangi mahsulot</button></div></div>
+  <p class="note">${S.on ? 'Server bilan ulangan: o\'zgarishlar barcha foydalanuvchilarga ko\'rinadi.' : 'Demo rejim (server ulanmagan): o\'zgarishlar faqat shu brauzerda ko\'rinadi.'}</p>
+  <div class="bar"><input class="in" id="pq" type="search" placeholder="Mahsulot qidirish" value="${esc(st.q)}"></div>
+  <div class="tw">${rows ? `<table><thead><tr><th></th><th>Nomi</th><th>Kategoriya</th><th>Narx</th><th></th><th></th></tr></thead><tbody>${rows}</tbody></table>` : '<p class="empty">Hech narsa topilmadi.</p>'}</div>`;
+}
+
+function msgsView() {
+  const M = msgs();
+  return `<div class="top"><h1>Xabarlar</h1></div><div class="box">${M.length ? M.map((m) => `<div class="msg${m.read ? '' : ' unread'}"><div class="msg__h"><span>${esc(m.name)} <small>${esc(m.contact)}</small></span><small>${when(m.ts)}</small></div><p>${esc(m.msg)}</p>
+    <div style="display:flex;gap:8px">${m.read ? '' : `<button class="btn btn--g btn--s" data-read="${m.id}">O'qilgan deb belgilash</button>`}<button class="btn btn--r btn--s" data-del-m="${m.id}">O'chirish</button></div></div>`).join('') : '<p class="empty">Xabarlar yo\'q. Saytdagi «Yordam» formasi orqali kelgan xabarlar shu yerda ko\'rinadi.</p>'}</div>`;
+}
+
+/* ---- Amallar ---- */
+const dlg = $('#dlg');
+async function saveProds(P) { if (S.on) S.prods = await api('PUT', '/api/admin/products', P); else sv('tz-admin-products', P); }
+function openForm(p) {
+  st.edit = p ? p.id : null; $('#dTitle').textContent = p ? 'Mahsulotni tahrirlash' : 'Yangi mahsulot';
+  $('#pCat').innerHTML = CATS.map((c) => `<option>${c}</option>`).join('');
+  $('#pName').value = p ? p.name : ''; $('#pCat').value = p ? p.cat : CATS[0]; $('#pPrice').value = p ? p.price : '';
+  $('#pDesc').value = p ? p.desc : ''; $('#pImg').value = p && p.img ? p.img : ''; $('#pEmo').value = p ? p.fb : ''; $('#pPop').checked = !!(p && p.pop);
+  $('#pErr').textContent = ''; dlg.classList.add('open'); $('#pName').focus();
+}
+const closeForm = () => dlg.classList.remove('open');
+$('#pCancel').onclick = closeForm; dlg.addEventListener('click', (e) => { if (e.target === dlg) closeForm(); });
+addEventListener('keydown', (e) => { if (e.key === 'Escape') closeForm(); });
+$('#pForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = $('#pName').value.trim(), price = Math.round(Number($('#pPrice').value));
+  if (name.length < 2) { $('#pErr').textContent = 'Mahsulot nomini kiriting.'; return; }
+  if (!(price > 0)) { $('#pErr').textContent = 'Narxni to\'g\'ri kiriting (0 dan katta).'; return; }
+  const img = $('#pImg').value.trim();
+  if (img && !/^https:\/\//i.test(img)) { $('#pErr').textContent = 'Rasm havolasi https:// bilan boshlansin.'; return; }
+  const P = prods(), item = { id: st.edit || 'p' + Date.now().toString(36), name, cat: $('#pCat').value, price, desc: $('#pDesc').value.trim() || name, img, fb: $('#pEmo').value.trim() || '🍽️', pop: $('#pPop').checked };
+  const i = P.findIndex((p) => p.id === st.edit);
+  if (i >= 0) P[i] = item; else P.push(item);
+  try { await saveProds(P); } catch (er) { $('#pErr').textContent = er.message; return; }
+  closeForm(); toast('Saqlandi'); render();
+});
+
+function csv() {
+  const O = orders(); if (!O.length) { toast('Buyurtmalar yo\'q'); return; }
+  const c = (v) => '"' + String(v).replace(/"/g, '""') + '"';
+  const out = ['Raqam,Sana,Ism,Telefon,Manzil,To\'lov,Soni,Jami,Holat', ...O.map((o) => [o.no, new Date(o.ts).toISOString(), o.name, o.phone, o.addr, o.pay, o.count, o.total, (STATUS[o.status] || [o.status])[0]].map(c).join(','))].join('\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + out], { type: 'text/csv' })); a.download = 'buyurtmalar.csv'; a.click(); URL.revokeObjectURL(a.href);
+}
+function seed() {
+  const names = ['Jasur Karimov', 'Dilnoza Aliyeva', 'Sardor Tursunov', 'Madina Yusupova', 'Bekzod Rahimov'], P = prods(), O = orders(), pays = ['Naqd pul', 'Payme', 'Click', 'Humo'], ss = ['done', 'done', 'way', 'cook', 'new'];
+  for (let i = 0; i < 12; i++) {
+    const items = [...Array(1 + Math.floor(Math.random() * 3))].map(() => [P[Math.floor(Math.random() * P.length)].id, 1 + Math.floor(Math.random() * 3)]);
+    const total = items.reduce((s, [id, q]) => s + (P.find((p) => p.id === id).price * q), 0);
+    O.push({ no: 'TZ-' + (1000 + Math.floor(Math.random() * 9000)), ts: Date.now() - Math.random() * 6 * 864e5, name: names[i % 5], phone: '+998 90 ' + (100 + i) + ' 45 67', addr: 'Chilonzor, ' + (i + 1) + '-uy', pay: pays[i % 4], total, count: items.reduce((s, x) => s + x[1], 0), items, status: ss[i % 5] });
+  }
+  O.sort((a, b) => b.ts - a.ts); sv('tz-admin-orders', O); toast('Demo buyurtmalar qo\'shildi'); render();
+}
+
+$('#view').addEventListener('click', async (e) => {
+  const b = e.target.closest('button'); if (!b) return; const d = b.dataset;
+  try {
+    if (d.do === 'seed') seed(); if (d.do === 'csv') csv(); if (d.do === 'add') openForm();
+    if (d.do === 'reset' && confirm('Barcha mahsulotlar asl holatga qaytarilsinmi?')) { if (S.on) await saveProds(DATA.products.map((p) => ({ ...p }))); else localStorage.removeItem('tz-admin-products'); toast('Asl holatga qaytarildi'); render(); }
+    if (d.edit) openForm(prods().find((p) => p.id === d.edit));
+    if (d.delP && confirm('Mahsulot o\'chirilsinmi?')) { await saveProds(prods().filter((p) => p.id !== d.delP)); toast('O\'chirildi'); render(); }
+    if (d.delO && confirm('Buyurtma o\'chirilsinmi?')) { if (S.on) { await api('DELETE', '/api/admin/orders/' + d.delO); S.orders = S.orders.filter((o) => o.no !== d.delO); } else sv('tz-admin-orders', orders().filter((o) => o.no !== d.delO)); render(); }
+    if (d.read) { if (S.on) { await api('PATCH', '/api/admin/messages/' + d.read); S.msgs = S.msgs.map((m) => (m.id == d.read ? { ...m, read: true } : m)); } else sv('tz-admin-msgs', msgs().map((m) => (m.id == d.read ? { ...m, read: true } : m))); render(); }
+    if (d.delM) { if (S.on) { await api('DELETE', '/api/admin/messages/' + d.delM); S.msgs = S.msgs.filter((m) => m.id != d.delM); } else sv('tz-admin-msgs', msgs().filter((m) => m.id != d.delM)); render(); }
+  } catch (er) { toast(er.message); }
+});
+$('#view').addEventListener('change', async (e) => {
+  if (e.target.id === 'fSt') { st.filter = e.target.value; render(); }
+  const no = e.target.dataset.st; if (!no) return;
+  try {
+    if (S.on) { await api('PATCH', '/api/admin/orders/' + no, { status: e.target.value }); S.orders = S.orders.map((o) => (o.no === no ? { ...o, status: e.target.value } : o)); }
+    else sv('tz-admin-orders', orders().map((o) => (o.no === no ? { ...o, status: e.target.value } : o)));
+    toast('Holat yangilandi'); render();
+  } catch (er) { toast(er.message); render(); }
+});
+$('#view').addEventListener('input', (e) => { if (e.target.id === 'pq') { st.q = e.target.value; const p = e.target.selectionStart; render(); const n = $('#pq'); n.focus(); n.setSelectionRange(p, p); } });
+// Serverni aniqlash, so'ng kirish
+(async () => {
+  try { const r = await fetch('/api/health', { cache: 'no-store' }); S.on = r.ok && (await r.json()).ok === true; } catch (e) { S.on = false; }
+  S.token = sessionStorage.getItem('tz-token') || '';
+  if (S.on && !S.token) sessionStorage.removeItem('tz-admin');
+  $('#loginHint').innerHTML = S.on ? 'Parolni kiriting. Server bilan ulangan.' : 'Parolni kiriting. Demo rejim (server ulanmagan)';
+  gate();
+  // Yangi buyurtma va xabarlarni avtomatik yangilash
+  setInterval(async () => { if (S.on && authed() && st.tab !== 'prods' && !dlg.classList.contains('open') && !document.activeElement.matches('select')) { try { await load(); render(); } catch (e) {} } }, 8000);
+})();
+</script>
+</body>
+</html>
